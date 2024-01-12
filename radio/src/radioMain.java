@@ -4,8 +4,6 @@ public class radioMain {
 
         Radio radio = new Radio();
 
-        Vista vista = new Vista(); // Se crea una nueva instancia de vista
-        vista.menu();
     }
 }
 

@@ -3,6 +3,10 @@
  */
 public class Radio implements IRadio{
 
+    Vista vista = new Vista(); 
+    {
+ vista.menu(); }
+
     
     private boolean encendido = false;
     private String frecuencia;
