@@ -15,6 +15,15 @@ public class Vista {
 
         while (true) {
             System.out.println("----- Radio ----- \n");
+            System.out.println("1. On / Off");
+            System.out.println("2. AM / FM");
+            System.out.println("3. Next" );
+            System.out.println("4. Guardar emisora");
+            System.out.println("5. Seleccionar emisora");
+            System.out.println("6. Salir");
+
+
+            
         
 
             String option = scan.next();
@@ -39,9 +48,21 @@ public class Vista {
                     
                     break;
 
+                case "4":
+            
+                    System.out.println(" \n");
+                    
+                    break;
+
+                case "5":
+            
+                    System.out.println(" \n");
+                    
+                    break;
 
 
-                case "8": 
+
+                case "6": 
                     System.out.println("----");
                     System.exit(0);
                 
