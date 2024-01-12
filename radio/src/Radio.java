@@ -3,7 +3,7 @@
  */
 public class Radio implements IRadio{
 
-
+    
     private boolean encendido = false;
     private String frecuencia;
     private double estacion;
