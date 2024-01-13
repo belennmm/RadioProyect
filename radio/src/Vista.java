@@ -124,12 +124,19 @@ public class  Vista extends  Frame  implements ActionListener{
                 }
             }
         }
-        
+
         updateestadoRadio();
     }
 
     // actualiza la etiqueta con el status actual del Radio
     private void updateestadoRadio() {
-        estadoRadio.setText("Status: " + (radio.isOn() ? "On" : "Off") + " " + (radio.isAM() ? "AM" : "FM"));
+        String estado = "Status: " + (radio.isOn() ? "On" : "Off") ;
+
+        if(radio.isOn()){
+            estado += " " + (radio.isAM() ? "AM": "FM");
+        }
+
+        estadoRadio.setText(estado);
+
     }
 }

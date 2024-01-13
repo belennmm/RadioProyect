@@ -59,28 +59,29 @@ public class Radio implements IRadio{
 
     @Override
     public void switchAMFM() {
-        if (frecuencia.equals("AM")){
-            frecuencia = "FM";
-        }
+        if(isOn()){
 
-        if (frecuencia.equals("FM")){
-            frecuencia = "AM";
+            if(frecuencia.equals("AM")){
+                frecuencia = "FM";
+            }
+            else if(frecuencia.equals("FM")){
+                frecuencia = "AM";
+            }
         }
         
     }
 
     @Override
     public void switchOnOff() {
-        if (isOn() == false){
+        if (!isOn()){
             encendido = true;
             frecuencia = "AM";
             estacion = 530.0;
 
         }  
-        
-        if (isOn() == true){
-            encendido = false;
-        }
+       else{
+        encendido=false;
+       }
 
         
     }
