@@ -45,19 +45,20 @@ public class Radio implements IRadio{
     @Override
     public double nextStation() {
 
-        
-        if(isAM() ){
-            estacion += 10;
-
-            if(estacion > 1610){
-                estacion = 530;
-            }
-        }
-        else{
-            estacion += 0.2;
-
-            if(estacion> 107.9){
-                estacion= 87.9;
+        if(isOn()){
+            if(isAM() ){
+                estacion += 10;
+                
+                if(estacion >1610 ){
+                    estacion= 530;
+                }
+            } 
+            else{
+                estacion += 0.2;
+                
+                if(estacion >107.9) {
+                    estacion =87.9;
+                }
             }
         }
 
@@ -86,7 +87,7 @@ public class Radio implements IRadio{
             }
             else if(frecuencia.equals("FM")){
                 frecuencia = "AM";
-                estacion = 530.0;
+                estacion = 530;
             }
         }
         
@@ -97,7 +98,7 @@ public class Radio implements IRadio{
         if (!isOn()){
             encendido = true;
             frecuencia = "AM";
-           
+            estacion = 530;
 
         }  
        else{
@@ -107,6 +108,9 @@ public class Radio implements IRadio{
         
     }
 
+    public double getCurrentStation() {
+        return estacion;
+    }
     
     
  

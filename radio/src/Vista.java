@@ -134,7 +134,7 @@ public class  Vista extends  Frame  implements ActionListener{
 
         if(radio.isOn()){
             estado += " " + (radio.isAM() ? "AM": "FM");
-            estado += " "+ radio.nextStation();
+            estado += " "+ radio.getCurrentStation();
         }
 
         estadoRadio.setText(estado);
