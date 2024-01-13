@@ -80,7 +80,7 @@ public class Radio implements IRadio{
 
         }  
        else{
-        encendido=false;
+        encendido=false ;
        }
 
         
