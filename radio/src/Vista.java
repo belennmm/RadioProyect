@@ -80,7 +80,7 @@ public class  Vista extends  Frame  implements ActionListener{
         add(nextStationBut , espacio) ;
 
         // para mostrar el estado del radio 
-        estadoRadio= new Label("Status:          ");
+        estadoRadio= new Label("Status:                    ");
         espacio.gridx= 0;
         espacio.gridy =  4;
         espacio.gridwidth= 5;
@@ -134,6 +134,7 @@ public class  Vista extends  Frame  implements ActionListener{
 
         if(radio.isOn()){
             estado += " " + (radio.isAM() ? "AM": "FM");
+            estado += " "+ radio.nextStation();
         }
 
         estadoRadio.setText(estado);
