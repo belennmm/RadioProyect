@@ -3,9 +3,10 @@
  */
 public class Radio implements IRadio{
 
-    Vista vista = new Vista(); 
-    {
- vista.menu(); }
+    private Vista vista;
+    public Radio() {
+        this.vista = new Vista(this);
+    }
 
     
     private boolean encendido = false;
