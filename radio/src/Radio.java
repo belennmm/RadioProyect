@@ -16,7 +16,10 @@ public class Radio implements IRadio{
 
     
     
-    
+    private double [] listaAM = new double[12];    
+    private double [] listaFM = new double[12];
+
+
     /** 
      * @return boolean
      */
@@ -67,14 +70,23 @@ public class Radio implements IRadio{
 
     @Override
     public void saveStation(int buttonId, double station) {
-       
+        if (isAM() == true) {
+            listaAM[buttonId-1] = station;
+        }
+        else {
+            listaFM[buttonId-1] = station; 
+        }
         
     }
 
     @Override
     public double selectStation(int buttonId) {
-      
-        return 0;
+      if (isAM()==true) {
+        return listaAM[buttonId-1];
+      }
+      else {
+        return listaFM[buttonId-1];
+      }
     }
 
     @Override
