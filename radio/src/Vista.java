@@ -15,7 +15,8 @@ import java.awt.event.ActionListener;
 public class  Vista extends  Frame  implements ActionListener{
 
     private Radio radio;
-
+ 
+    
     private Button  on_offBut;
     private Button  am_fmButt;
     private Button  nextStationBut;
@@ -24,6 +25,10 @@ public class  Vista extends  Frame  implements ActionListener{
     private Label estadoRadio ;
 
 
+    /**
+     * Vista de la interfaz con la que el usuario interactúa.
+     * @param radio
+     */
     public Vista( Radio  radio){
         this.radio =  radio;
 
@@ -31,6 +36,10 @@ public class  Vista extends  Frame  implements ActionListener{
         GridBagConstraints espacio=new GridBagConstraints();
 
         espacio.insets = new Insets(5, 0, 5, 0);
+
+        // para que los bototnes se encuentren juntos horizontalmente
+        espacio.fill = GridBagConstraints.HORIZONTAL;
+
 
         // botón de On/Off
         on_offBut = new Button(" O ");
@@ -53,13 +62,13 @@ public class  Vista extends  Frame  implements ActionListener{
 
         for(int count=0 ; count<estacionesButt.length;  count++){
             // se establecen los botones y el espacio en dónde se ubicarán
-            estacionesButt[ count] =new Button("" +(count+1) ) ;
+            estacionesButt[ count] =new Button("" +(count +1) ) ;
 
             customizeButton( estacionesButt[count]);
             espacio.gridx = count % 6; // para que en cada fila queden 6 estaciones
             espacio.gridy= 1 + count / 6;
             espacio.gridwidth = 1;
-
+    
             add(estacionesButt[ count], espacio);
         }
 
@@ -80,16 +89,21 @@ public class  Vista extends  Frame  implements ActionListener{
         add(nextStationBut , espacio) ;
 
         // para mostrar el estado del radio 
-        estadoRadio= new Label("Status:          ");
+        estadoRadio= new Label("Status:           ");
         espacio.gridx= 0;
         espacio.gridy =  4;
-        espacio.gridwidth= 5;
+        espacio.gridwidth= 7;
         espacio.insets = new Insets(10, 0, 0, 0);
         add(estadoRadio , espacio) ;
 
+        radioLabel(estadoRadio);
+
+        //Caracgterísticas de la pantalla
         setTitle("Radio");
-        setSize(400, 300);
+        setSize(700, 300);
         setVisible(true);
+        setLocationRelativeTo(null);
+        setBackground(Color.decode("#ffebc9"));
     }
 
     // carcterísticas de los botones 
@@ -97,11 +111,39 @@ public class  Vista extends  Frame  implements ActionListener{
         button.setFont(new  Font("Monospaced" , Font.PLAIN, 20));
         button.setBackground(Color.lightGray);
         button.addActionListener(this );
+
+        // cambiar las caracterísitcas del botón on/off
+        if(button==on_offBut){
+            button.setBackground( Color.decode("#F36161") ); 
+            button.setFont(new Font("Monospaced", Font.BOLD, 22));
+            button.setForeground(Color.decode("#631818"));
+        } 
+
+        // cambiar las caracterísitcas del botón de AM/FM
+        if(button==am_fmButt){
+            button.setBackground( Color.decode("#7CA3BC") ); 
+            button.setFont(new Font("Monospaced", Font.PLAIN, 20));
+            button.setForeground(Color.decode("#122835"));
+        } 
+
+        // cambiar las caracterísitcas del botón de siguiente estación
+        if(button==nextStationBut){
+            button.setBackground( Color.decode("#9ab9b6") ); 
+            button.setFont(new Font("Monospaced", Font.BOLD, 20));
+            button.setForeground(Color.decode("#213533"));
+        } 
+
+        // cambiar las caracterísitcas del botón guardar estación
+        if(button==saveB){
+            button.setBackground( Color.decode("#9ab9b6") ); 
+            button.setFont(new Font("Monospaced", Font.PLAIN, 20));
+            button.setForeground(Color.decode("#213533"));
+        } 
+
     }
 
     // Acción que realiza cada botón
     @Override
-
     public void actionPerformed( ActionEvent e ){
 
         if(e.getSource()== on_offBut){
@@ -124,12 +166,35 @@ public class  Vista extends  Frame  implements ActionListener{
                 }
             }
         }
-        
+
         updateestadoRadio();
     }
 
+
     // actualiza la etiqueta con el status actual del Radio
     private void updateestadoRadio() {
-        estadoRadio.setText("Status: " + (radio.isOn() ? "On" : "Off") + " " + (radio.isAM() ? "AM" : "FM"));
+      
+        String estado = "Status: " + (radio.isOn() ? "On" : "Off") ;
+
+        if(radio.isOn()){
+            estado += " " + (radio.isAM() ? "AM": "FM");
+            estado +=  " " +  String.format("%.2f", radio.getCurrentStation());
+        }
+
+        estadoRadio.setText(estado);
+
     }
+
+    
+    /**
+     * Caracterísitcas visuales de Label.
+     * @param label
+     */
+    private void radioLabel(Label label){
+        label.setFont(new Font("Monospaced", Font.BOLD, 17));
+        estadoRadio.setBackground(Color.decode("#e5c297"));
+        estadoRadio.setForeground(Color.decode("#543523"));
+
+    }
+
 }
