@@ -38,6 +38,8 @@ public class  Vista extends  Frame  implements ActionListener{
     public Vista( Radio  radio){
         this.radio =  radio;
 
+        this.listaPrueba  = Arrays.asList(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12);
+
         setLayout (new  GridBagLayout() );
         GridBagConstraints espacio=new GridBagConstraints();
 
@@ -95,11 +97,11 @@ public class  Vista extends  Frame  implements ActionListener{
         add(nextStationBut , espacio) ;
 
         // para mostrar el estado del radio 
-        estadoRadio= new Label("Status:           ");
+        estadoRadio= new Label("Status:                            ");
         espacio.gridx= 0;
         espacio.gridy =  4;
         espacio.gridwidth= 7;
-        espacio.insets = new Insets(10, 0, 0, 0);
+        espacio.insets = new Insets(10, -52, 0, 0);
         add(estadoRadio , espacio) ;
 
         radioLabel(estadoRadio);
@@ -152,52 +154,57 @@ public class  Vista extends  Frame  implements ActionListener{
      private List<Integer> listaPrueba;
      private LinkedList<String> lastClickedLabels = new LinkedList<>();
 
-        // Acción que realiza cada botón
+    // Acción que realiza cada botón
     @Override
-    public void actionPerformed( ActionEvent e ){
-        listaPrueba = Arrays.asList(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12);
-
-        if(e.getSource()== on_offBut){
-
+    public void actionPerformed( ActionEvent e){
+        if (e.getSource() == on_offBut){
             radio.switchOnOff();
-        }
-        else if (e.getSource()== am_fmButt){
+        } 
+        else if (e.getSource() == am_fmButt){
             radio.switchAMFM();
         } 
-        else if(e.getSource() ==nextStationBut){
+        else if (e.getSource() == nextStationBut){
             radio.nextStation();
         } 
-        else if (listaPrueba.contains(Integer.parseInt(e.getActionCommand()))){ 
-            lastClickedLabels.add(e.getActionCommand());
-        }
-        else if(e.getSource() ==saveB){
-            //Object source = e.getSource();
-            //String id = ((Button)source).getLabel();
-            int numbot = Integer.parseInt(lastClickedLabels.get(lastClickedLabels.size()-1));      //Se castea el label del botón a un int para que sea aceptado como parámetro
-            radio.saveStation(numbot, radio.getCurrentStation());
+        else if (e.getSource() == saveB){
+           
+            if( !lastClickedLabels.isEmpty() ){
+                int buttonId =Integer.parseInt(lastClickedLabels.getLast());
+                radio.saveStation(buttonId, radio.getCurrentStation());
+                // mostrar en terminal
+                System.out.println( "Station saved to button " +  buttonId);
             }
-        
-        else{
-            
-            for( int counter = 1; counter < estacionesButt.length; counter++){
-                if (e.getSource() == estacionesButt[ counter]){
-                 radio.selectStation(counter);   
-                }
-            }
-        }
+        } 
 
+        else if(listaPrueba.contains(Integer.parseInt(e.getActionCommand()))){
+            lastClickedLabels.add(e.getActionCommand());
+            int buttonId = Integer.parseInt(e.getActionCommand());
+
+            double selectedStation = radio.selectStation(buttonId);
+            // mostrar en terminal
+            System.out.println("Selected Station for button " +  buttonId + ":  " + selectedStation);
+        }
+    
         updateestadoRadio();
     }
-
+    
 
     // actualiza la etiqueta con el status actual del Radio
-    private void updateestadoRadio() {
+    private void updateestadoRadio(){
       
         String estado = "Status: " + (radio.isOn() ? "On" : "Off") ;
 
         if(radio.isOn()){
             estado += " " + (radio.isAM() ? "AM": "FM");
             estado +=  " " +  String.format("%.2f", radio.getCurrentStation());
+
+            // mostrar la estación del button presionado
+            if (!lastClickedLabels.isEmpty()){
+                int buttonId = Integer.parseInt(lastClickedLabels.getLast());
+
+                double savedStation = radio.selectStation(buttonId );
+                estado += " | Saved: " + String.format("%.2f",  savedStation) + "";
+            }
         }
 
         estadoRadio.setText(estado);

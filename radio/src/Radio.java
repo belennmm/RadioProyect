@@ -18,7 +18,7 @@ public class Radio implements IRadio{
     
     private double [] listaAM = new double[12];    
     private double [] listaFM = new double[12];
-
+    private int ultimoClickedButt;
 
     /** 
      * @return boolean
@@ -69,26 +69,39 @@ public class Radio implements IRadio{
     }
 
     @Override
-    public void saveStation(int buttonId, double station) {
-        this.estacion = station;
-        if (isAM() == true) {
-            listaAM[buttonId-1] = estacion;     //Se le resta 1 para que no exista error de index outofbonds
+    public void saveStation( int buttonId,  double station ){
+        if(isOn()){
+
+            if( isAM() ){
+                listaAM[ buttonId - 1 ] =station; //Se le resta 1 para que no exista error de index outofbonds
+            } 
+            else{
+                listaFM[ buttonId -  1] =station;
+            }
         }
-        else {
-            listaFM[buttonId-1] = estacion; 
-        }
-        
     }
 
     @Override
-    public double selectStation(int buttonId) {
-      if (isAM()==true) {
-        return listaAM[buttonId-1];         //Se le resta 1 para que no exista error de index outofbonds
-      }
-      else {
-        return listaFM[buttonId-1];
-      }
+    public double selectStation(int buttonId){
+        if(isOn()){
+            ultimoClickedButt = buttonId;
+
+            if (isAM()){
+                return listaAM[buttonId-1];
+            } 
+            else{
+                return listaFM[buttonId-1]; //Se le resta 1 para que no exista error de index outofbonds
+            }
+        }
+
+        return 0.0; // valor que se retorna si está off
     }
+
+    // Agrega este método para obtener el último botón presionado
+    public int getultimoClickedButt() {
+        return ultimoClickedButt;
+    }
+
 
     @Override
     public void switchAMFM() {
