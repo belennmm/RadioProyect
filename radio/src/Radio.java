@@ -123,8 +123,8 @@ public class Radio implements IRadio{
     public void switchOnOff() {
         if (!isOn()){
             encendido = true;
-            frecuencia = "AM";
-            estacion = 530;
+            frecuencia = "FM";
+            estacion = 87.9;
 
         }  
        else{
