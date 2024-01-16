@@ -8,6 +8,12 @@ import java.awt.Insets;
 import java.awt.Label;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Arrays;
+import java.util.EventObject;
+import java.util.LinkedList;
+import java.util.List;
+
+import javax.swing.JButton;
 
 /**
  * Representa la Vista del programa.
@@ -37,7 +43,7 @@ public class  Vista extends  Frame  implements ActionListener{
 
         espacio.insets = new Insets(5, 0, 5, 0);
 
-        // para que los bototnes se encuentren juntos horizontalmente
+        // para que los botones se encuentren juntos horizontalmente
         espacio.fill = GridBagConstraints.HORIZONTAL;
 
 
@@ -142,11 +148,17 @@ public class  Vista extends  Frame  implements ActionListener{
 
     }
 
-    // Acción que realiza cada botón
+
+     private List<Integer> listaPrueba;
+     private LinkedList<String> lastClickedLabels = new LinkedList<>();
+
+        // Acción que realiza cada botón
     @Override
     public void actionPerformed( ActionEvent e ){
+        listaPrueba = Arrays.asList(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12);
 
         if(e.getSource()== on_offBut){
+
             radio.switchOnOff();
         }
         else if (e.getSource()== am_fmButt){
@@ -155,14 +167,21 @@ public class  Vista extends  Frame  implements ActionListener{
         else if(e.getSource() ==nextStationBut){
             radio.nextStation();
         } 
+        else if (listaPrueba.contains(Integer.parseInt(e.getActionCommand()))){ 
+            lastClickedLabels.add(e.getActionCommand());
+        }
         else if(e.getSource() ==saveB){
-            
-        } 
+            //Object source = e.getSource();
+            //String id = ((Button)source).getLabel();
+            int numbot = Integer.parseInt(lastClickedLabels.get(lastClickedLabels.size()-1));      //Se castea el label del botón a un int para que sea aceptado como parámetro
+            radio.saveStation(numbot, radio.getCurrentStation());
+            }
+        
         else{
             
-            for( int counter = 0; counter < estacionesButt.length; counter++){
+            for( int counter = 1; counter < estacionesButt.length; counter++){
                 if (e.getSource() == estacionesButt[ counter]){
-                    
+                 radio.selectStation(counter);   
                 }
             }
         }
