@@ -70,11 +70,12 @@ public class Radio implements IRadio{
 
     @Override
     public void saveStation(int buttonId, double station) {
+        this.estacion = station;
         if (isAM() == true) {
-            listaAM[buttonId-1] = station;
+            listaAM[buttonId-1] = estacion;     //Se le resta 1 para que no exista error de index outofbonds
         }
         else {
-            listaFM[buttonId-1] = station; 
+            listaFM[buttonId-1] = estacion; 
         }
         
     }
@@ -82,7 +83,7 @@ public class Radio implements IRadio{
     @Override
     public double selectStation(int buttonId) {
       if (isAM()==true) {
-        return listaAM[buttonId-1];
+        return listaAM[buttonId-1];         //Se le resta 1 para que no exista error de index outofbonds
       }
       else {
         return listaFM[buttonId-1];
