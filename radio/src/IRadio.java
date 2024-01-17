@@ -8,3 +8,4 @@ public interface IRadio {
     double nextStation();
     
 }
+//Interfaz acordada por toda la clase. No se modificó ningún método. 

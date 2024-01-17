@@ -69,7 +69,7 @@ public class  Vista extends  Frame  implements ActionListener{
         estacionesButt = new Button[12];
 
         for(int count=0 ; count<estacionesButt.length;  count++){
-            // se establecen los botones y el espacio en dónde se ubicarán
+            // se establecen los botones y el espacio en donde se ubicarán
             estacionesButt[ count] =new Button("" +(count +1) ) ;
 
             customizeButton( estacionesButt[count]);
@@ -151,7 +151,7 @@ public class  Vista extends  Frame  implements ActionListener{
     }
 
 
-     private List<Integer> listaPrueba;
+     private List<Integer> listaPrueba;     //Creación de lista que contiene números del 1 al 12 para comparar y castear el "label" de los botones
      private LinkedList<String> lastClickedLabels = new LinkedList<>();
 
     // Acción que realiza cada botón
@@ -168,7 +168,7 @@ public class  Vista extends  Frame  implements ActionListener{
         } 
         else if (e.getSource() == saveB){
            
-            if( !lastClickedLabels.isEmpty() ){
+            if( !lastClickedLabels.isEmpty() ){     //Para validar que el último botón oprimido fuera un label casteable en int, no el botón de guardar.
                 int buttonId =Integer.parseInt(lastClickedLabels.getLast());
                 radio.saveStation(buttonId, radio.getCurrentStation());
                 // mostrar en terminal
@@ -176,7 +176,7 @@ public class  Vista extends  Frame  implements ActionListener{
             }
         } 
 
-        else if(listaPrueba.contains(Integer.parseInt(e.getActionCommand()))){
+        else if(listaPrueba.contains(Integer.parseInt(e.getActionCommand()))){ //Para validar que el último botón oprimido fuera un label casteable en int, no el botón de guardar
             lastClickedLabels.add(e.getActionCommand());
             int buttonId = Integer.parseInt(e.getActionCommand());
 
@@ -198,7 +198,7 @@ public class  Vista extends  Frame  implements ActionListener{
             estado += " " + (radio.isAM() ? "AM": "FM");
             estado +=  " " +  String.format("%.2f", radio.getCurrentStation());
 
-            // mostrar la estación del button presionado
+            // mostrar la estación guardada del button presionado
             if (!lastClickedLabels.isEmpty()){
                  int buttonId = Integer.parseInt(lastClickedLabels.getLast());
                 double savedStation;

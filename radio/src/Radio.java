@@ -1,5 +1,5 @@
 /**
- * Representa la interface del programa.
+ * Implementa la interface del programa.
  */
 public class Radio implements IRadio{
 
@@ -18,7 +18,7 @@ public class Radio implements IRadio{
     
     public double [] listaAM = new double[12];    
     public double [] listaFM = new double[12];
-    private int ultimoClickedButt;
+    private int ultimoClickedButt;  //Se crea esta variable para tener registro de los botones oprimidos y que la gui no produzca un error al intentar leer el botón de guardado
 
     /** 
      * @return boolean
@@ -82,7 +82,7 @@ public class Radio implements IRadio{
 
     @Override
     public double selectStation(int buttonId){
-        boolean hayElementosNoCeroAM = false;
+        boolean hayElementosNoCeroAM = false;   //Métodos para verificar si existen datos guardados en los arrays creados. Usado para evitar guardar una estación como 0.0 por error. 
         for (double elemento : listaAM) {
             if (elemento != 0) {
                 hayElementosNoCeroAM = true;
@@ -101,13 +101,13 @@ boolean hayElementosNoCeroFM = false;
 
             if (isAM()){
                 if (estacion != 0 && hayElementosNoCeroAM) {
-                    if (listaAM[buttonId-1] !=0 ){
-                        estacion = listaAM[buttonId-1];
+                    if (listaAM[buttonId-1] !=0 ){      
+                        estacion = listaAM[buttonId-1]; 
                     }
                      
                 }
                 
-                return listaAM[buttonId-1];
+                return listaAM[buttonId-1]; //Se le resta 1 para que no exista error de index outofbonds
             } 
             else{
                 if (estacion != 0 && hayElementosNoCeroFM) {
@@ -135,7 +135,7 @@ boolean hayElementosNoCeroFM = false;
 
             if(frecuencia.equals("AM")){
                 frecuencia = "FM";
-                estacion = 87.9;
+                estacion = 87.9;    //Al cambiar de frecuencia, se asigna una estación predeterminada inicial.
             }
             else if(frecuencia.equals("FM")){
                 frecuencia = "AM";
@@ -150,7 +150,7 @@ boolean hayElementosNoCeroFM = false;
         if (!isOn()){
             encendido = true;
             frecuencia = "FM";
-            estacion = 87.9;
+            estacion = 87.9;    //Configuración predeterminada inicial al encender. 
 
         }  
        else{
