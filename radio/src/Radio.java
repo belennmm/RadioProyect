@@ -14,6 +14,7 @@ public class Radio implements IRadio{
     private String frecuencia;
     private double estacion;
 
+
     
     
     public double [] listaAM = new double[12];    
@@ -47,7 +48,7 @@ public class Radio implements IRadio{
 
     @Override
     public double nextStation() {
-        
+
         if(isOn()){
             if(isAM() ){
                 estacion += 10;
@@ -64,6 +65,7 @@ public class Radio implements IRadio{
                 }
             }
         }
+
         return estacion;
     }
 
@@ -135,7 +137,11 @@ boolean hayElementosNoCeroFM = false;
 
             if(frecuencia.equals("AM")){
                 frecuencia = "FM";
+
+                estacion = 87.9;
+
                 estacion = 87.9;    //Al cambiar de frecuencia, se asigna una estación predeterminada inicial.
+
             }
             else if(frecuencia.equals("FM")){
                 frecuencia = "AM";
@@ -149,8 +155,13 @@ boolean hayElementosNoCeroFM = false;
     public void switchOnOff() {
         if (!isOn()){
             encendido = true;
+
+            frecuencia = "AM";
+            estacion = 530;
+
             frecuencia = "FM";
             estacion = 87.9;    //Configuración predeterminada inicial al encender. 
+
 
         }  
        else{
@@ -163,7 +174,8 @@ boolean hayElementosNoCeroFM = false;
     public double getCurrentStation() {
         return estacion;
     }
-    
+
+
     
     
  

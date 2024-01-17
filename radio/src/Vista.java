@@ -97,7 +97,11 @@ public class  Vista extends  Frame  implements ActionListener{
         add(nextStationBut , espacio) ;
 
         // para mostrar el estado del radio 
+
+        estadoRadio= new Label("Status:                    ");
+
         estadoRadio= new Label("Status:                            ");
+
         espacio.gridx= 0;
         espacio.gridy =  4;
         espacio.gridwidth= 7;
@@ -184,18 +188,24 @@ public class  Vista extends  Frame  implements ActionListener{
             // mostrar en terminal
             System.out.println("Selected Station for button " +  buttonId + ":  " + selectedStation);
         }
-    
+
         updateestadoRadio();
     }
     
 
     // actualiza la etiqueta con el status actual del Radio
+
+    private void updateestadoRadio() {
+
     private void updateestadoRadio(){
-      
+
         String estado = "Status: " + (radio.isOn() ? "On" : "Off") ;
 
         if(radio.isOn()){
             estado += " " + (radio.isAM() ? "AM": "FM");
+
+            estado += " "+ radio.getCurrentStation();
+
             estado +=  " " +  String.format("%.2f", radio.getCurrentStation());
 
             // mostrar la estación guardada del button presionado
@@ -210,6 +220,7 @@ public class  Vista extends  Frame  implements ActionListener{
                   }  
                  estado += " | Saved: " + String.format("%.2f",  savedStation) + "";
              }
+
         }
 
         estadoRadio.setText(estado);
