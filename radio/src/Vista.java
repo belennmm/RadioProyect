@@ -206,8 +206,6 @@ public class  Vista extends  Frame  implements ActionListener{
         if(radio.isOn()){
             estado += " " + (radio.isAM() ? "AM": "FM");
 
-            estado += " "+ radio.getCurrentStation();
-
             estado +=  " " +  String.format("%.2f", radio.getCurrentStation());
 
             // mostrar la estación guardada del button presionado
