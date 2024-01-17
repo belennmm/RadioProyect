@@ -29,4 +29,31 @@ public class RadioTest {
         assertTrue (nextStation>initialStation);
         assertTrue(nextStation <= 107.9  ); // 107.9 como la última estación de FM
     }
+
+    @Test
+    public void testSavingInFM(){
+        Radio radio = new Radio();
+        radio.switchOnOff();
+        double stationToSave = radio.getCurrentStation();
+        radio.saveStation(1, stationToSave);
+        for (int i = 0; i < 4; i++) {
+            radio.nextStation();
+        }
+        radio.selectStation(1);
+        assertTrue(radio.getCurrentStation() == stationToSave);
+    }
+
+    @Test
+    public void testSavingInAM(){
+        Radio radio = new Radio();
+        radio.switchOnOff();
+        radio.switchAMFM();
+        double stationToSave = radio.getCurrentStation();
+        radio.saveStation(3, stationToSave);
+        for (int i = 0; i < 5; i++) {
+            radio.nextStation();    
+        }
+        radio.selectStation(3);
+        assertTrue(radio.getCurrentStation() == stationToSave);
+    }
 }

@@ -16,8 +16,8 @@ public class Radio implements IRadio{
 
     
     
-    private double [] listaAM = new double[12];    
-    private double [] listaFM = new double[12];
+    public double [] listaAM = new double[12];    
+    public double [] listaFM = new double[12];
     private int ultimoClickedButt;
 
     /** 
@@ -47,7 +47,7 @@ public class Radio implements IRadio{
 
     @Override
     public double nextStation() {
-
+        
         if(isOn()){
             if(isAM() ){
                 estacion += 10;
@@ -64,7 +64,6 @@ public class Radio implements IRadio{
                 }
             }
         }
-
         return estacion;
     }
 
@@ -83,13 +82,40 @@ public class Radio implements IRadio{
 
     @Override
     public double selectStation(int buttonId){
+        boolean hayElementosNoCeroAM = false;
+        for (double elemento : listaAM) {
+            if (elemento != 0) {
+                hayElementosNoCeroAM = true;
+                break;
+            }
+}
+boolean hayElementosNoCeroFM = false;
+        for (double elemento : listaFM) {
+            if (elemento != 0) {
+                hayElementosNoCeroFM = true;
+                break;
+            }
+}
         if(isOn()){
             ultimoClickedButt = buttonId;
 
             if (isAM()){
+                if (estacion != 0 && hayElementosNoCeroAM) {
+                    if (listaAM[buttonId-1] !=0 ){
+                        estacion = listaAM[buttonId-1];
+                    }
+                     
+                }
+                
                 return listaAM[buttonId-1];
             } 
             else{
+                if (estacion != 0 && hayElementosNoCeroFM) {
+                    if (listaFM[buttonId-1] !=0 ){
+                        estacion = listaFM[buttonId-1];
+                    }
+                     
+                }
                 return listaFM[buttonId-1]; //Se le resta 1 para que no exista error de index outofbonds
             }
         }
@@ -137,6 +163,7 @@ public class Radio implements IRadio{
     public double getCurrentStation() {
         return estacion;
     }
+    
     
     
  
