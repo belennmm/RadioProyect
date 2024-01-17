@@ -1,4 +1,9 @@
 public class radioMain {
+    /**
+     * Main del programa.
+     * @param args
+     * @throws Exception
+     */
     public static void main(String[] args) throws Exception {
         System.out.println("----");
 

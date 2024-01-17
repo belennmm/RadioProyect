@@ -154,8 +154,11 @@ public class  Vista extends  Frame  implements ActionListener{
      private List<Integer> listaPrueba;     //Creación de lista que contiene números del 1 al 12 para comparar y castear el "label" de los botones
      private LinkedList<String> lastClickedLabels = new LinkedList<>();
 
-    // Acción que realiza cada botón
+    
     @Override
+    /**
+     * Establece la acción que realiza cada botón.
+     */
     public void actionPerformed( ActionEvent e){
         if (e.getSource() == on_offBut){
             radio.switchOnOff();
@@ -189,7 +192,9 @@ public class  Vista extends  Frame  implements ActionListener{
     }
     
 
-    // actualiza la etiqueta con el status actual del Radio
+    /**
+     * Actualiza la etiqueta con el status actual del Radio
+     */
     private void updateestadoRadio(){
       
         String estado = "Status: " + (radio.isOn() ? "On" : "Off") ;

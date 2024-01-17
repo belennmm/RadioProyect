@@ -1,3 +1,6 @@
+/**
+ * Interface del programa.
+ */
 public interface IRadio {
     void saveStation(int buttonId, double station);
     boolean isAM();

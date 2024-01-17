@@ -20,10 +20,13 @@ public class Radio implements IRadio{
     public double [] listaFM = new double[12];
     private int ultimoClickedButt;  //Se crea esta variable para tener registro de los botones oprimidos y que la gui no produzca un error al intentar leer el botón de guardado
 
-    /** 
-     * @return boolean
-     */
+    
+    
+    
     @Override
+    /**
+     * Determina si la frecuencia es AM.
+     */
     public boolean isAM() {
         if ( frecuencia.equals("AM")){
             return true;
@@ -33,8 +36,11 @@ public class Radio implements IRadio{
         }
     }
 
-
+    
     @Override
+    /**
+     * Determina si el radio está encendido.
+     */
     public boolean isOn() {
         if (encendido == false){
             return false;
@@ -46,6 +52,9 @@ public class Radio implements IRadio{
     }
 
     @Override
+    /**
+     * Cambia de estación.
+     */
     public double nextStation() {
         
         if(isOn()){
@@ -66,8 +75,11 @@ public class Radio implements IRadio{
         }
         return estacion;
     }
-
+    
     @Override
+    /**
+     * Guarda la estación.
+     */
     public void saveStation( int buttonId,  double station ){
         if(isOn()){
 
@@ -81,6 +93,9 @@ public class Radio implements IRadio{
     }
 
     @Override
+    /**
+     * Elige la estación deseada.
+     */
     public double selectStation(int buttonId){
         boolean hayElementosNoCeroAM = false;   //Métodos para verificar si existen datos guardados en los arrays creados. Usado para evitar guardar una estación como 0.0 por error. 
         for (double elemento : listaAM) {
@@ -88,14 +103,15 @@ public class Radio implements IRadio{
                 hayElementosNoCeroAM = true;
                 break;
             }
-}
-boolean hayElementosNoCeroFM = false;
+        }   
+
+        boolean hayElementosNoCeroFM = false;
         for (double elemento : listaFM) {
             if (elemento != 0) {
                 hayElementosNoCeroFM = true;
                 break;
             }
-}
+        }
         if(isOn()){
             ultimoClickedButt = buttonId;
 
@@ -123,13 +139,20 @@ boolean hayElementosNoCeroFM = false;
         return 0.0; // valor que se retorna si está off
     }
 
-    // Agrega este método para obtener el último botón presionado
+    
+    /**
+     * Devuelve el último botón presionado.
+     * @return
+     */
     public int getultimoClickedButt() {
         return ultimoClickedButt;
     }
 
 
     @Override
+    /**
+     * Cambia la frecuencia del radio, AM o FM.
+     */
     public void switchAMFM() {
         if(isOn()){
 
@@ -146,6 +169,9 @@ boolean hayElementosNoCeroFM = false;
     }
 
     @Override
+    /**
+     * Cambia el estado del radio, encendido o apagado.
+     */
     public void switchOnOff() {
         if (!isOn()){
             encendido = true;
@@ -160,6 +186,10 @@ boolean hayElementosNoCeroFM = false;
         
     }
 
+    /**
+     * Devuelve la estación.
+     * @return
+     */
     public double getCurrentStation() {
         return estacion;
     }
