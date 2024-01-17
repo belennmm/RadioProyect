@@ -200,11 +200,16 @@ public class  Vista extends  Frame  implements ActionListener{
 
             // mostrar la estación del button presionado
             if (!lastClickedLabels.isEmpty()){
-                int buttonId = Integer.parseInt(lastClickedLabels.getLast());
-
-                double savedStation = radio.selectStation(buttonId );
-                estado += " | Saved: " + String.format("%.2f",  savedStation) + "";
-            }
+                 int buttonId = Integer.parseInt(lastClickedLabels.getLast());
+                double savedStation;
+                  if (radio.isAM()) {
+                    savedStation = radio.listaAM[buttonId-1];
+                  }
+                  else {
+                    savedStation = radio.listaFM[buttonId-1];
+                  }  
+                 estado += " | Saved: " + String.format("%.2f",  savedStation) + "";
+             }
         }
 
         estadoRadio.setText(estado);
