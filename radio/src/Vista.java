@@ -194,9 +194,6 @@ public class  Vista extends  Frame  implements ActionListener{
     
 
     // actualiza la etiqueta con el status actual del Radio
-
-    private void updateestadoRadio() {
-
     private void updateestadoRadio(){
 
         String estado = "Status: " + (radio.isOn() ? "On" : "Off") ;
